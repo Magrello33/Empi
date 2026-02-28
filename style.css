@@ -1,0 +1,253 @@
+/* RESET E BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #222;
+}
+
+/* HEADER FIXO */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: #002244;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  z-index: 999;
+}
+
+header img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* ESPAÇO PARA NÃO SOBRESCREVER O HEADER */
+main {
+  margin-top: 70px;
+}
+
+/* BARRA DE URGÊNCIA */
+.urgencia {
+  background: #ff9900;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* BANNER */
+.banner {
+  height: 260px;
+  background: url('banner.png') center/cover no-repeat;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.hero h1 {
+  font-size: 26px;
+  color: #002244;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #555;
+}
+
+/* BOTÕES NA HERO */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: #25D366;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* BOTÃO SIMULAR CRÉDITO */
+.btn.simular {
+  background: #007bff; /* azul */
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 16px 28px;
+}
+
+.btn.simular:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* PROVA SOCIAL */
+.prova {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #002244;
+}
+
+.seguro {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+  color: #444;
+}
+
+/* SEÇÕES */
+section {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #002244;
+}
+
+/* SERVIÇOS */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.service {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* DEPOIMENTOS */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.testimonial {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.testimonial strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.stars {
+  color: #ffb400;
+  margin-bottom: 5px;
+}
+
+/* FORMULÁRIO */
+form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: #002244;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  background: #0a192f;
+  color: #ccc;
+  padding: 40px 20px;
+  text-align: left;
+  font-size: 14px;
+}
+
+footer a {
+  display: block;
+  color: #ccc;
+  margin-bottom: 6px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+/* WHATSAPP FIXO PROFISSIONAL */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.whatsapp a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;       /* Tamanho padrão, retangular */
+  background: #25D366;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;      /* Levemente arredondado */
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.whatsapp a:hover {
+  background: #1ebe57;
+  transform: translateY(-2px);
+}
+
+.whatsapp a::before {
+  content: "📱"; /* ícone do WhatsApp */
+  font-size: 18px;
+}
+
+/* MOBILE */
+@media(max-width:768px) {
+  .hero h1 { font-size: 22px; }
+  .services, .testimonials { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário Simulador - Confinance</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  padding: 50px 10px;
+}
+#simulador {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+#simulador h2 {
+  margin-bottom: 20px;
+  color: #002244;
+}
+#simulador input,
+#simulador select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+#simulador input:focus,
+#simulador select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+  outline: none;
+}
+#simularBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+#simularBtn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+#barraProgressoContainer {
+  width: 100%;
+  background: #ddd;
+  border-radius: 12px;
+  margin-top: 20px;
+  height: 22px;
+  display: none;
+  overflow: hidden;
+}
+#barraProgresso {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,#007bff,#00c6ff);
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  line-height: 22px;
+}
+#resultado {
+  margin-top: 25px;
+  font-weight: bold;
+  display: none;
+  color: #002244;
+  text-align: center;
+}
+#whatsappBtn {
+  display: none;
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #25D366;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+}
+#whatsappBtn:hover {
+  background: #1ebe57;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<div id="simulador">
+  <h2>Simulador de Crédito</h2>
+  <input type="text" id="nome" placeholder="Nome completo">
+  <input type="text" id="cpf" placeholder="CPF">
+  <input type="number" id="valor" placeholder="valor desejado (mínimo 1,500)" min="1500">
+  
+  <select id="parcelas">
+    <option value="">Número de parcelas</option>
+    <option value="6">6</option>
+    <option value="12">12</option>
+    <option value="24">24</option>
+  </select>
+  
+  <button id="simularBtn">Simular</button>
+  
+  <div id="barraProgressoContainer">
+    <div id="barraProgresso">0%</div>
+  </div>
+  
+  <div id="resultado"></div>
+  
+  <a href="https://wa.me/559298259xxxx" target="_blank" id="whatsappBtn">Falar com Atendente</a>
+</div>
+
+<script>
+function formatarValor(valor){
+  return valor.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+document.getElementById('simularBtn').addEventListener('click', function(){
+  const nome = document.getElementById('nome').value.trim();
+  const cpf = document.getElementById('cpf').value.trim();
+  const valor = parseFloat(document.getElementById('valor').value);
+  const parcelas = parseInt(document.getElementById('parcelas').value);
+
+  if(!nome || !cpf || !valor || !parcelas){
+    alert('Preencha todos os campos!');
+    return;
+  }
+  if(valor < 1500){
+    alert('O valor mínimo do empréstimo é 1,500');
+    return;
+  }
+
+  const jurosMensal = 0.02; 
+  const parcela = (valor * Math.pow(1+jurosMensal, parcelas) * jurosMensal) / (Math.pow(1+jurosMensal, parcelas) - 1);
+  const total = parcela * parcelas;
+
+  const barraContainer = document.getElementById('barraProgressoContainer');
+  const barra = document.getElementById('barraProgresso');
+  barraContainer.style.display = 'block';
+  barra.style.width = '0%';
+  barra.innerText = '0%';
+  
+  document.getElementById('resultado').style.display = 'none';
+  document.getElementById('whatsappBtn').style.display = 'none';
+  
+  let progresso = 0;
+  const interval = setInterval(() => {
+    progresso++;
+    barra.style.width = progresso + '%';
+    barra.innerText = progresso + '%';
+    if(progresso >= 100){
+      clearInterval(interval);
+      document.getElementById('resultado').style.display = 'block';
+      document.getElementById('resultado').innerHTML = 
+        `Olá ${nome}, parabéns!<br>
+        O valor do seu empréstimo de ${formatarValor(valor)} em ${parcelas} parcelas, total a pagar ${formatarValor(total)}, foi liberado.<br>
+        Favor entrar em contato com o atendente para enviar os documentos necessários.`;
+      document.getElementById('whatsappBtn').style.display = 'inline-block';
+    }
+  }, 20);
+});
+</script>
+
+</body>
+</html>
